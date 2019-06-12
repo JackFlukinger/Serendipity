@@ -7,9 +7,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RandomComponent implements OnInit {
 
-  constructor() { }
+  moviesRated = 0;
+
+  constructor() {
+
+   }
 
   ngOnInit() {
+
+
   }
 
 }
