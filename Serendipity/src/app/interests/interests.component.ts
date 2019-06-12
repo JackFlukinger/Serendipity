@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { element } from 'protractor';
 
 @Component({
   selector: 'app-interests',
@@ -34,6 +35,21 @@ export class InterestsComponent implements OnInit {
     "War",
     "Western",
   ]
+
+  //when the user clicks, get the genre that they click on and the use that to change the value of likedgenres at that index
+  likedgenres: boolean[] = new Array(this.genres.length)
+  toggleGenre(index:number){
+    this.likedgenres[index] = !this.likedgenres[index]
+  }
+
+  //change the color of an item when the user clicks
+  changeColor(event: Event){
+      var elementId: string = (event.target as Element).id;
+      elementId.bold();
+      console.log("Has been clicked" + elementId);
+  }
+
+  
 
   constructor() { }
 

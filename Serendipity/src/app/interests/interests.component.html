@@ -1,6 +1,5 @@
 <div class = "content">
   <form [formGroup]="profileForm">
-
     <label>
       Age:
       <input type="text" [formControl]="age">
@@ -15,9 +14,11 @@
     </label>
   </form>
   
-  <h2>Genres List</h2>
+  <h2>Please select your favourite genres..</h2>
   <ul>
-    <li *ngFor = "let genre of genres"> {{genre}}</li>
+    <li class = "genreBtn" *ngFor = "let genre of genres" id = "{{genre.id}}" (click)="changeColor($event)"> 
+      {{genre}}
+    </li>
   </ul>
 </div>
 
