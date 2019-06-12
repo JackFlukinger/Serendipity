@@ -1,3 +1,16 @@
-<p>
-  interests works!
-</p>
+<form [formGroup]="profileForm">
+
+  <label>
+    Age:
+    <input type="text" [formControl]="age">
+  </label>
+  <label>
+    Gender:
+    <input type="text" [formControl]="gender">
+  </label>
+  <label>
+    Occupation:
+    <input type="text" [formControl]="occupation">
+  </label>
+  
+</form>
