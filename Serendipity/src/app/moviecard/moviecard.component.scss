@@ -1,0 +1,22 @@
+.card {
+  margin-top: 20px;
+  height: 100%;
+  box-shadow: 0px 0px 5px black;
+  padding: 0% 3%;
+}
+
+.titleblock {
+  display: flex;
+
+}
+
+.ageRating {
+  background-color: lightgreen;
+  height: fit-content;
+  font-family: Roboto, sans-serif;
+  font-weight: bold;
+  font-size: 12px;
+  margin-top: 3em;
+  margin-left: 1em;
+  padding: .2em;
+}

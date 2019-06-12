@@ -7,6 +7,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MoviecardComponent implements OnInit {
 
+  title = "Test Movie";
+  ageRating = "PG-13";
+  year = "2001";
+
+
   constructor() { }
 
   ngOnInit() {
