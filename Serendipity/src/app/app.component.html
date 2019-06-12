@@ -4,6 +4,6 @@
     serendipity
   </h1>
 </div>
-<app-interests *ngIf="!hasChosenInterests && !serendipity"></app-interests>
-<app-random *ngIf="hasChosenInterests && !serendipity"></app-random>
-<app-serendipitous *ngIf="serendipity"></app-serendipitous>
+<app-interests *ngIf="stage == 1"></app-interests>
+<app-random *ngIf="stage == 2"></app-random>
+<app-serendipitous *ngIf="stage == 3"></app-serendipitous>

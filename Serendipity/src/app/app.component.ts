@@ -7,6 +7,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  hasChosenInterests = true;
-  serendipity = false;
+  stage = 2;
 }
