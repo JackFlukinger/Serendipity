@@ -1,16 +1,23 @@
-<form [formGroup]="profileForm">
+<div class = "content">
+  <form [formGroup]="profileForm">
 
-  <label>
-    Age:
-    <input type="text" [formControl]="age">
-  </label>
-  <label>
-    Gender:
-    <input type="text" [formControl]="gender">
-  </label>
-  <label>
-    Occupation:
-    <input type="text" [formControl]="occupation">
-  </label>
+    <label>
+      Age:
+      <input type="text" [formControl]="age">
+    </label>
+    <label>
+      Gender:
+      <input type="text" [formControl]="gender">
+    </label>
+    <label>
+      Occupation:
+      <input type="text" [formControl]="occupation">
+    </label>
+  </form>
   
-</form>
+  <h2>Genres List</h2>
+  <ul>
+    <li *ngFor = "let genre of genres"> {{genre}}</li>
+  </ul>
+</div>
+

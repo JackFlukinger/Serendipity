@@ -14,6 +14,27 @@ export class InterestsComponent implements OnInit {
     occupation: new FormControl('')
   });
 
+  genres: string[] = [
+    "Action",
+    "Adventure",
+    "Animation",
+    "Children's",
+    "Comedy",
+    "Crime",
+    "Documentary",
+    "Drama",
+    "Fantasy",
+    "Film-Noir",
+    "Horror",
+    "Musical",
+    "Mystery",
+    "Romance",
+    "Sci-Fi",
+    "Thriller",
+    "War",
+    "Western",
+  ]
+
   constructor() { }
 
   ngOnInit() {
