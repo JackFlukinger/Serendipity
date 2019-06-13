@@ -1,5 +1,7 @@
 <div class = "content">
-  <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+  <form [formGroup]="profileForm" (ngSubmit)="onSubmit()" novalidate>
+
+    <div class = "bioItems">
     <label>
       Age:
       <input
@@ -19,17 +21,14 @@
       formControlName="occupation"
       placeholder="Bus Driver">
     </label>
+   </div>
 
     <div class="genres">
-      <h2 class="topmessage">please select your favourite genres</h2>
-      <ul>
-        <li class = "genreBtn" [ngClass]="likedgenres[i] ? 'selected' : ''" *ngFor = "let genre of genres; let i = index" id="{{ i }}" (click)="toggleGenre(i)">
-          {{ genre }}
-        </li>
-      </ul>
-    </div>
+        <h2 class="formField">Please select your favourite genres:</h2>
+        <input type="button" class="genreBtn" [ngClass]="likedgenres[i] ? 'selected' : ''" *ngFor = "let genre of genres; let i = index" id="{{ i }}" (click)="toggleGenre(i)" value ="{{ genre }}">
+      </div>
 
-    <button type="submit" [disabled]="!profileForm.valid">>></button>
+    <button class="btn_submit" type="submit" [disabled]="!profileForm.valid" (click)="onSubmit()">next></button>
 
   </form>
 </div>
