@@ -3,6 +3,13 @@
   <div class="titleblock">
     <h2 style="font-size: 2em;">{{ title }} ({{ year }})</h2>
     <div class="ageRating">{{ ageRating }}</div>
-    <div class="rating"></div>
+    <div class="rating">
+      <span id="1star" [ngClass]="stars >= 1 ? 'selected' : ''" class="fa fa-star" (click)="stars = 1; tempstars = 1;" (mouseenter)="tempstars = stars; stars = 1;"  (mouseleave) ="stars = tempstars; tempstars = 1;"></span>
+      <span id="2star" [ngClass]="stars >= 2 ? 'selected' : ''" class="fa fa-star" (click)="stars = 2; tempstars = 2;" (mouseenter)="tempstars = stars; stars = 2;"  (mouseleave) ="stars = tempstars; tempstars = 2;"></span>
+      <span id="3star" [ngClass]="stars >= 3 ? 'selected' : ''" class="fa fa-star" (click)="stars = 3; tempstars = 3;" (mouseenter)="tempstars = stars; stars = 3;"  (mouseleave) ="stars = tempstars; tempstars = 3;"></span>
+      <span id="4star" [ngClass]="stars >= 4 ? 'selected' : ''" class="fa fa-star" (click)="stars = 4; tempstars = 4;" (mouseenter)="tempstars = stars; stars = 4;"  (mouseleave) ="stars = tempstars; tempstars = 4;"></span>
+      <span id="5star" [ngClass]="stars >= 5 ? 'selected' : ''" class="fa fa-star" (click)="stars = 5; tempstars = 5;" (mouseenter)="tempstars = stars; stars = 5;"  (mouseleave) ="stars = tempstars; tempstars = 5;"></span>
+    </div>
   </div>
+  <div class="continue" *ngIf="stars > 0 && tempstars > 0" [@slideDown]>Next Movie ></div>
 </div>
