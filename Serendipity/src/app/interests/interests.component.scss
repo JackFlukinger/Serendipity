@@ -1,3 +1,7 @@
+ul {
+  padding: 0;
+}
+
 label, li{
     font-family: 'Roboto', sans-serif;
     font-size: 1.3em;
@@ -7,11 +11,38 @@ label, li{
     list-style: none;
   }
 
-  .genreBtn{
-    background: rgb(192, 191, 191);
-    padding: 15px;
-  }
+.genreBtn{
+  background: white;
+  padding: 16px;
+  transition: .2s;
+  text-align: left;
+  border-bottom: 1px solid darkgrey;
+}
 
-  form{
-      text-align: center;
-  }
+.genreBtn:hover {
+  padding-bottom: 14px;
+  border-bottom: 3px solid black;
+  cursor: pointer;
+}
+
+.selected {
+  background: lightgreen;
+  text-align: right;
+}
+
+
+form{
+    text-align: center;
+}
+
+input {
+  font-family: 'Roboto', sans-serif;
+  font-weight: bold;
+  border: 0px;
+  border-bottom: 1px solid black;
+  font-size: 1em;
+}
+
+input:focus {
+  outline: none;
+}
