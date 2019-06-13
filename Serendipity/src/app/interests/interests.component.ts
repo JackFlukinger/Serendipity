@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { element } from 'protractor';
+import { AppComponent } from '../app.component';
 
 @Component({
   selector: 'app-interests',
@@ -36,18 +37,20 @@ export class InterestsComponent implements OnInit {
   likedgenres: boolean[] = new Array(this.genres.length)
 
   toggleGenre(index:number){
-    this.likedgenres[index] = !this.likedgenres[index]
+    this.likedgenres[index] = !this.likedgenres[index];
+    console.log("Has been clicked" + index);
+    console.log(this.likedgenres);
   }
 
-  //change the color of an item when the user clicks
-  toggleColor(event: Event){
-      var elementId: string = (event.target as Element).id;
-      console.log("Has been clicked" + elementId);
-  }
 
   onSubmit() {
     // TODO: Use EventEmitter with form value
-    console.warn(this.profileForm.value);
+    //if (this.profileForm.valid) {
+    console.log("Form Submitted!");
+    //}
+    //else{
+    //console.warn(this.profileForm.value);
+    //}
   }
 
   constructor(private fb: FormBuilder) { }
@@ -57,7 +60,9 @@ export class InterestsComponent implements OnInit {
       age: ['', [Validators.required, Validators.min(1), Validators.max(110), Validators.pattern('[^[1-9]+$')]],
       gender: ['', [Validators.required, Validators.pattern('[a-zA-Z ]*')]],
       occupation: ['', [Validators.required, Validators.pattern('[a-zA-Z ]*')]]
-    });
+    }
+    //{validator:  }
+    );
   }
 
 }
