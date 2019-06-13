@@ -1,11 +1,25 @@
 import { Component } from '@angular/core';
+import { style, state, animate, transition, trigger } from '@angular/animations';
 
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
+  animations: [
+    trigger('fade', [
+      transition(':enter', [   // :enter is alias to 'void => *'
+        style({opacity:0}),
+        animate('0.2s 0.2s ease-in', style({opacity:1}))
+      ]),
+      transition(':leave', [   // :enter is alias to 'void => *'
+        style({opacity:1}),
+        animate('0.2s ease-in', style({opacity:0}))
+      ])
+    ])
+  ]
 })
 export class AppComponent {
-  stage = 2;
+  showDefinition = false;
+  stage = 1;
 }

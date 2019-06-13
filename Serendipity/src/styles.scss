@@ -1,4 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
+body {
+  position: relative;
+  margin: 0;
+  min-height: 93vh;
+}
+
 .content {
   margin: auto;
   width: 50%;

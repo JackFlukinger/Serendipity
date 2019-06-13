@@ -2,25 +2,16 @@
   <form [formGroup]="profileForm" (ngSubmit)="onSubmit()" novalidate>
 
     <div class = "bioItems">
-    <label>
-      Age:
       <input
       type="number"
       formControlName="age"
-      placeholder="32">
-    </label>
-    <label>
-      Gender:
+      placeholder="Age">
       <input
       formControlName="gender"
-      placeholder="Male">
-    </label>
-    <label>
-      Occupation:
+      placeholder="Gender">
       <input
       formControlName="occupation"
-      placeholder="Bus Driver">
-    </label>
+      placeholder="Occupation">
    </div>
 
     <div class="genres">
@@ -28,7 +19,7 @@
         <input type="button" class="genreBtn" [ngClass]="likedgenres[i] ? 'selected' : ''" *ngFor = "let genre of genres; let i = index" id="{{ i }}" (click)="toggleGenre(i)" value ="{{ genre }}">
       </div>
 
-    <button class="btn_submit" type="submit" [disabled]="!profileForm.valid" (click)="onSubmit()">next></button>
+    <input type="submit" [disabled]="!profileForm.valid" value="next>" (click)="onSubmit()">
 
   </form>
 </div>
