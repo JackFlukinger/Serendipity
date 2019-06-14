@@ -1,25 +1,43 @@
 <div class = "content">
-  <form [formGroup]="profileForm" (ngSubmit)="onSubmit()" novalidate>
+  <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
 
     <div class = "bioItems">
       <input
       type="number"
       formControlName="age"
       placeholder="Age">
+      <div class="dropdownContainer"
+      (focusin)="showDropdown=true"
+      (focusout)="showDropdown=false"
+      (mouseenter)="showDropdown=true"
+      (mouseleave)="showDropdown=false">
+        <input
+        type="text"
+        formControlName="gender"
+        placeholder="Gender"
+        style="width:100%">
+        <div *ngIf="showDropdown" class="dropdown" [@slide]>
+          <li class="dropdownItem"
+          (click)="this.profileForm.get('gender').setValue('Male'); showDropdown=false">Male</li>
+          <li class="dropdownItem"
+          (click)="this.profileForm.get('gender').setValue('Female'); showDropdown=false">Female</li>
+          <li class="dropdownItem"
+          (click)="this.profileForm.get('gender').setValue('Other'); showDropdown=false">Other</li>
+        </div>
+      </div>
       <input
-      formControlName="gender"
-      placeholder="Gender">
-      <input
-      formControlName="occupation"
-      placeholder="Occupation">
+      type="email"
+      formControlName="email"
+      placeholder="Email"
+      autocomplete="none">
    </div>
 
     <div class="genres">
-        <h2 class="formField">Please select your favourite genres:</h2>
+        <h2 class="formField">Please select your 3 favorite genres:</h2>
         <input type="button" class="genreBtn" [ngClass]="likedgenres[i] ? 'selected' : ''" *ngFor = "let genre of genres; let i = index" id="{{ i }}" (click)="toggleGenre(i)" value ="{{ genre }}">
       </div>
 
-    <input type="submit" [disabled]="!profileForm.valid" value="next>" (click)="onSubmit()">
+    <input type="submit" [disabled]="!profileForm.valid || this.getNumOfLikedGenres() < 3" value="next>">
 
   </form>
 </div>

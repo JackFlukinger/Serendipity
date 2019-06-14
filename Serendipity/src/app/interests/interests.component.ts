@@ -1,14 +1,32 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { element } from 'protractor';
 import { AppComponent } from '../app.component';
+import { BackendService } from '../backend.service';
+import { trigger, style, animate, transition } from '@angular/animations';
+
 
 @Component({
   selector: 'app-interests',
   templateUrl: './interests.component.html',
-  styleUrls: ['./interests.component.scss']
+  styleUrls: ['./interests.component.scss'],
+  providers: [ BackendService ],
+  animations: [
+  trigger('slide', [
+    transition(':enter', [   // :enter is alias to 'void => *'
+      style({height:0}),
+      animate('0.2s ease-out', style({height:'*'}))
+    ]),
+    transition(':leave', [   // :enter is alias to 'void => *'
+      style({height:'*'}),
+      animate('0.2s ease-out', style({height:0}))
+    ])
+  ])
+]
 })
+
 export class InterestsComponent implements OnInit {
+
+  showDropdown: boolean;
 
   profileForm: FormGroup;
 
@@ -42,27 +60,35 @@ export class InterestsComponent implements OnInit {
     console.log(this.likedgenres);
   }
 
-
-  onSubmit() {
-    // TODO: Use EventEmitter with form value
-    //if (this.profileForm.valid) {
-    console.log("Form Submitted!");
-    //}
-    //else{
-    //console.warn(this.profileForm.value);
-    //}
+  getNumOfLikedGenres() {
+    let num = 0;
+    for (let genre in this.likedgenres) {
+      if (genre) {
+        num = num + 1;
+      }
+    }
+    return num;
   }
 
-  constructor(private fb: FormBuilder) { }
+  constructor(
+    private fb: FormBuilder,
+    private backend: BackendService
+  ) { }
 
   ngOnInit() {
+
+    this.showDropdown = false;
+
     this.profileForm = this.fb.group({
-      age: ['', [Validators.required, Validators.min(1), Validators.max(110), Validators.pattern('[^[1-9]+$')]],
-      gender: ['', [Validators.required, Validators.pattern('[a-zA-Z ]*')]],
-      occupation: ['', [Validators.required, Validators.pattern('[a-zA-Z ]*')]]
-    }
-    //{validator:  }
-    );
+      age: ['', [Validators.required, Validators.min(0), Validators.max(110)]],
+      gender: ['', [Validators.required]],
+      email: ['', [Validators.required, Validators.email]]
+    });
+  }
+
+  onSubmit() {
+    console.log("Form Submitted!");
+    console.log(this.getNumOfLikedGenres());
   }
 
 }

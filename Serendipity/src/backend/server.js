@@ -16,6 +16,6 @@ app.listen(8000, () => {
   console.log('Server started!');
 })
 
-app.route('/api/cats').post((req, res) => {
+app.route('/api/user').post((req, res) => {
   res.send(201, req.body)
 })

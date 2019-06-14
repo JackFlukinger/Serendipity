@@ -50,6 +50,11 @@ input {
   font-size: 1.3em;
 }
 
+input[type=text], input[type=number], input[type=email] {
+  width: 33%;
+  margin-top: 20px;
+}
+
 input:focus {
   outline: none;
 }
@@ -73,7 +78,37 @@ input[type=submit] {
 
 }
 
+.dropdownContainer {
+  margin: 0;
+  display: inline-block;
+  width: 33%;
+}
+
+.dropdown {
+  width: 33%;
+  position: absolute;
+  left: 33%;
+  background: black;
+  color: white;
+  text-align: left;
+  padding-left: 10px;
+  padding-top: 10px;
+  overflow-y: hidden;
+}
+
+.dropdownItem {
+  list-style: none;
+  text-size: 1em;
+  font-family: 'Roboto', sans-serif;
+  margin-bottom: 10px;
+}
+
+.dropdownItem:hover {
+  cursor: pointer;
+  font-weight: bold;
+}
 
 .bioItems{
-  line-height: 50px;
+  position: relative;
+  padding: 0px 20px;
 }

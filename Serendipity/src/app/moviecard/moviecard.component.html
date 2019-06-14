@@ -11,5 +11,5 @@
       <span id="5star" [ngClass]="stars >= 5 ? 'selected' : ''" class="fa fa-star" (click)="stars = 5; tempstars = 5;" (mouseenter)="tempstars = stars; stars = 5;"  (mouseleave) ="stars = tempstars; tempstars = 5;"></span>
     </div>
   </div>
-  <div class="continue" *ngIf="stars > 0 && tempstars > 0" [@slideDown]>next movie></div>
+  <div class="continue" *ngIf="stars > 0 && tempstars > 0" [@slide]>next movie></div>
 </div>
