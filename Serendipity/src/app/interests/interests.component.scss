@@ -20,21 +20,22 @@ label, .formField{
   font-weight: lighter;
   margin: 0;
   background: white;
+  width: 33%;
   padding: 25px;
   transition: .2s;
-  text-align: left;
+  text-align: center;
   border: none;
 }
 
 .genreBtn:hover {
   //padding-bottom: 14px;
+  //border-top: 3px solid black;
   box-shadow: 0px 0px 3px black inset;
   cursor: pointer;
 }
 
 .selected {
   background: lightgreen;
-  text-align: right;
 }
 
 
