@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AppComponent } from '../app.component';
-import { BackendService } from '../backend.service';
+import { BackendService, User } from '../backend.service';
 import { trigger, style, animate, transition } from '@angular/animations';
 
 
@@ -88,7 +88,24 @@ export class InterestsComponent implements OnInit {
 
   onSubmit() {
     console.log("Form Submitted!");
-    console.log(this.getNumOfLikedGenres());
+    let g: number[] = new Array(this.getNumOfLikedGenres());
+    let index = 0;
+
+    for (let i = 0; i < this.likedgenres.length; i++) {
+      if (this.likedgenres[i]) {
+        g[index] = i;
+        index++;
+      }
+    }
+
+    let user : User = {
+      age : this.profileForm.get('age').value,
+      email : this.profileForm.get('email').value,
+      gender : this.profileForm.get('gender').value,
+      genres : g
+    }
+    console.log(user);
+    //this.backend.addUser(user);
   }
 
 }

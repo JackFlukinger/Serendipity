@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { style, state, animate, transition, trigger } from '@angular/animations';
+import { BackendService } from './backend.service';
+import { Observable } from 'rxjs';
 
 
 @Component({
@@ -21,5 +23,15 @@ import { style, state, animate, transition, trigger } from '@angular/animations'
 })
 export class AppComponent {
   showDefinition = false;
-  stage = 1;
+  $stage: Observable<number>;
+
+  constructor(
+    private backend: BackendService,
+  ) { }
+
+  ngOnInit() {
+    this.$stage = this.backend.fetchStage();
+    console.log(this.$stage);
+  }
+
 }

@@ -33,7 +33,7 @@
    </div>
 
     <div class="genres">
-        <h2 class="formField">Please select your 3 favorite genres:</h2>
+        <h2 class="formField">Please select <i>at least 3</i> of your favorite genres:</h2>
         <input type="button" class="genreBtn" [ngClass]="likedgenres[i] ? 'selected' : ''" *ngFor = "let genre of genres; let i = index" id="{{ i }}" (click)="toggleGenre(i)" value ="{{ genre }}">
       </div>
 
