@@ -34,7 +34,7 @@
 
     <div class="genres">
         <h2 class="formField">Please select <i>at least 3</i> of your favorite genres:</h2>
-        <input type="button" class="genreBtn" [ngClass]="likedgenres[i] ? 'selected' : ''" *ngFor = "let genre of genres; let i = index" id="{{ i }}" (click)="toggleGenre(i)" value ="{{ genre }}">
+        <input type="button" class="genreBtn" [ngClass]="this.likedgenres.indexOf(i) > -1 ? 'selected' : ''" *ngFor = "let genre of genres; let i = index" id="{{ i }}" (click)="toggleGenre(i)" value ="{{ genre }}">
       </div>
 
     <input type="submit" [disabled]="!profileForm.valid || this.getNumOfLikedGenres() < 3" value="next>">

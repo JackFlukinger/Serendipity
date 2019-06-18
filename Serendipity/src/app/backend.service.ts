@@ -29,7 +29,7 @@ export class BackendService {
     return <Observable<number>>this.http.get("http://localhost:8000/api/users");
   }
 
-  addUser(user: User, stage: Observable<number>) {
+  addUser(user: User) {
     this.http.post("http://localhost:8000/api/users", {
       "age":  user.age,
       "gender":  user.gender,
@@ -38,7 +38,6 @@ export class BackendService {
     }).subscribe(
       data  => {
         console.log("Next stage");
-        stage = this.fetchStage();
     }, error  => {
       console.log("Error", error);
     });

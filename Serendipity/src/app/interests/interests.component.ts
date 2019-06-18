@@ -52,22 +52,20 @@ export class InterestsComponent implements OnInit {
   ]
 
   //when the user clicks, get the genre that they click on and the use that to change the value of likedgenres at that index
-  likedgenres: boolean[] = new Array(this.genres.length)
+  likedgenres: number[];
 
   toggleGenre(index:number){
-    this.likedgenres[index] = !this.likedgenres[index];
+    if (this.likedgenres.indexOf(index) != -1) {
+      this.likedgenres.splice(this.likedgenres.indexOf(index), 1);
+    } else {
+      this.likedgenres.push(index);
+    }
     console.log("Has been clicked" + index);
     console.log(this.likedgenres);
   }
 
   getNumOfLikedGenres() {
-    let num = 0;
-    for (let genre in this.likedgenres) {
-      if (genre) {
-        num = num + 1;
-      }
-    }
-    return num;
+    return this.likedgenres.length;
   }
 
   constructor(
@@ -78,6 +76,7 @@ export class InterestsComponent implements OnInit {
   ngOnInit() {
 
     this.showDropdown = false;
+    this.likedgenres = [];
 
     this.profileForm = this.fb.group({
       age: ['', [Validators.required, Validators.min(0), Validators.max(110)]],
@@ -88,24 +87,16 @@ export class InterestsComponent implements OnInit {
 
   onSubmit() {
     console.log("Form Submitted!");
-    let g: number[] = new Array(this.getNumOfLikedGenres());
     let index = 0;
-
-    for (let i = 0; i < this.likedgenres.length; i++) {
-      if (this.likedgenres[i]) {
-        g[index] = i;
-        index++;
-      }
-    }
 
     let user : User = {
       age : this.profileForm.get('age').value,
       email : this.profileForm.get('email').value,
       gender : this.profileForm.get('gender').value,
-      genres : g
+      genres : this.likedgenres
     }
     console.log(user);
-    //this.backend.addUser(user);
+    this.backend.addUser(user);
   }
 
 }
