@@ -30,8 +30,7 @@ app.get('/api/users', (req, res) => {
     stage = sqlGetStage(user);
   }
 
-  res.write(stage);
-  res.send();
+  res.send(stage.toString());
 });
 
 app.post('/api/users', (req, res) => {
@@ -45,7 +44,7 @@ app.post('/api/users', (req, res) => {
   sqlAddUser(age, gender, email, likedgenres);
 
   res.write("User added!")
-  res.send();
+  res.end();
 });
 
 function sqlAddUser(age, gender, email, genres) {
@@ -57,7 +56,7 @@ function sqlAddUser(age, gender, email, genres) {
   });
 
 
-  let sql = 'INSERT INTO users(email, age, gender, favgenres) VALUES (\'' + 
+  let sql = 'INSERT INTO users(email, age, gender, favgenres, stage) VALUES (\'' +
   email + '\', \'' +
   age + '\', \'' +
   gender + '\', \'' +
@@ -65,8 +64,8 @@ function sqlAddUser(age, gender, email, genres) {
   2 + '\');';
 
   db.run(sql);
-  
-  
+
+
   db.close((err) => {
     if (err) {
       return console.error(err.message);
@@ -91,10 +90,10 @@ function sqlGetStage(user) {
       return console.error(err.message);
     }
     return row
-      ? console.log(row.stage)
-      : console.log(1);  //Return stage 1 if user is not in database
+      ? row.stage
+      : 1;  //Return stage 1 if user is not in database
     });
-  
+
 
   db.close((err) => {
     if (err) {
