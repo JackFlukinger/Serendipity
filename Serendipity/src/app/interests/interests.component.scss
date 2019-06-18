@@ -116,5 +116,7 @@ input[type=submit] {
 
 .invalidInput{
   font-family: 'Roboto', sans-serif;
+  list-style: none;
+  padding-left:10px;
   border-left: 5px solid #a94442; /* red */
 }

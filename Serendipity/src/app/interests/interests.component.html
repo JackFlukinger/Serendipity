@@ -41,6 +41,8 @@
     <input type="submit" [disabled]="!profileForm.valid || this.getNumOfLikedGenres() < 3" value="next>">
 
   </form>
-  
-  <p *ngIf="!this.profileForm.valid || this.getNumOfLikedGenres()<3" class = "invalidInput">Please fill all fields correctly.</p>
+
+  <div *ngIf= "!this.profileForm.valid || this.getNumOfLikedGenres()<3" class = "invalidInput">
+      <p *ngFor="let item of invalidsLst;">{{errorMess[invalidsLst.indexOf(item)]}}</p>
+  </div>
 </div>

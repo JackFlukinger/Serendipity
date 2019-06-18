@@ -51,8 +51,15 @@ export class InterestsComponent implements OnInit {
     "Western",
   ]
 
+  errorMess: string[] = [
+    "Invalid age",
+    "Invalid email",
+    "Please select at least 3 genres"]
+
   //when the user clicks, get the genre that they click on and the use that to change the value of likedgenres at that index
   likedgenres: number[];
+
+  invalidsLst: any[];
 
   toggleGenre(index:number){
     if (this.likedgenres.indexOf(index) != -1) {
@@ -83,6 +90,27 @@ export class InterestsComponent implements OnInit {
       gender: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.email]]
     });
+
+    this.invalidsLst = this.findInvalidControls();
+    console.log(this.invalidsLst);
+
+
+    this.profileForm.get('age').valueChanges.subscribe(
+      ()=>{
+        this.invalidsLst = this.findInvalidControls();
+      }
+    )
+    this.profileForm.get('gender').valueChanges.subscribe(
+      ()=>{
+        this.invalidsLst = this.findInvalidControls();
+      }
+    )
+    this.profileForm.get('email').valueChanges.subscribe(
+      ()=>{
+        this.invalidsLst = this.findInvalidControls();
+      }
+    )
+
   }
 
   onSubmit() {
@@ -98,6 +126,18 @@ export class InterestsComponent implements OnInit {
     console.log(user);
     this.backend.addUser(user);
   }
+
+
+  findInvalidControls() {
+    const invalid = [];
+    const controls = this.profileForm.controls;
+    for (const name in controls) {
+        if (controls[name].invalid) {
+            invalid.push(name);
+        }
+    }
+    return invalid;
+}
 
 
 }
