@@ -5,7 +5,7 @@
       <input
       type="number"
       formControlName="age"
-      placeholder="Age">
+      placeholder="Age *">
       <div class="dropdownContainer"
       (focusin)="showDropdown=true"
       (focusout)="showDropdown=false"
@@ -14,7 +14,7 @@
         <input
         type="text"
         formControlName="gender"
-        placeholder="Gender"
+        placeholder="Gender *"
         style="width:100%"
         readonly>
         <div *ngIf="showDropdown" class="dropdown" [@slide]>
@@ -29,7 +29,7 @@
       <input
       type="email"
       formControlName="email"
-      placeholder="Email"
+      placeholder="Email *"
       autocomplete="none">
    </div>
 
@@ -42,11 +42,10 @@
 
   </form>
 
-<<<<<<< HEAD
-  <div *ngIf= "!this.profileForm.valid || this.getNumOfLikedGenres()<3" class = "invalidInput">
-      <p *ngFor="let item of invalidsLst;">{{errorMess[invalidsLst.indexOf(item)]}}</p>
+  <div *ngIf= "!this.profileForm.valid || this.getNumOfLikedGenres() < 3" class="invalidInput">
+    <p *ngIf="!this.profileForm.get('age').valid && (this.profileForm.get('age').touched || this.profileForm.get('age').dirty)" [@slide]>Invalid Age</p>
+    <p *ngIf="!this.profileForm.get('gender').valid && (this.profileForm.get('gender').touched || this.profileForm.get('gender').dirty)" [@slide]>Invalid Gender</p>
+    <p *ngIf="!this.profileForm.get('email').valid && (this.profileForm.get('email').touched || this.profileForm.get('email').dirty)" [@slide]>Invalid Email</p>
+    <p *ngIf="(this.getNumOfLikedGenres() < 3 && this.getNumOfLikedGenres() > 0) || (this.profileForm.touched || this.profileForm.dirty)" [@slide]>Please select at least three genres!</p>
   </div>
-=======
-  <p *ngIf="!this.profileForm.valid || this.getNumOfLikedGenres()<3" class = "invalidInput">Please fill all fields correctly.</p>
->>>>>>> 4058511353572971191ab27c0d9215b0e1bc83b7
 </div>
