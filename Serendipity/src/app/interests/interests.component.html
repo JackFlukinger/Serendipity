@@ -15,7 +15,8 @@
         type="text"
         formControlName="gender"
         placeholder="Gender"
-        style="width:100%">
+        style="width:100%"
+        readonly>
         <div *ngIf="showDropdown" class="dropdown" [@slide]>
           <li class="dropdownItem"
           (click)="this.profileForm.get('gender').setValue('Male'); showDropdown=false">Male</li>
@@ -41,5 +42,5 @@
 
   </form>
   
-  <p [ngClass]="!this.profileForm.valid? 'invalidInput': ''">Please fill all fields correctly.</p>
+  <p *ngIf="!this.profileForm.valid || this.getNumOfLikedGenres()<3" class = "invalidInput">Please fill all fields correctly.</p>
 </div>
