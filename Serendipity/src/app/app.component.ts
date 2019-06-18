@@ -23,14 +23,15 @@ import { Observable } from 'rxjs';
 })
 export class AppComponent {
   showDefinition = false;
-  $stage: Observable<number>;
+  $stage: number = 1;
+
 
   constructor(
     private backend: BackendService,
   ) { }
 
   ngOnInit() {
-    this.$stage = this.backend.fetchStage();
+    //this.$stage = this.backend.fetchStage();
     console.log(this.$stage);
   }
 

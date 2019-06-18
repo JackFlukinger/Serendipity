@@ -40,4 +40,6 @@
     <input type="submit" [disabled]="!profileForm.valid || this.getNumOfLikedGenres() < 3" value="next>">
 
   </form>
+  
+  <p [ngClass]="!this.profileForm.valid? 'invalidInput': ''">Please fill all fields correctly.</p>
 </div>
