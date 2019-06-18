@@ -25,13 +25,12 @@ export class AppComponent {
   showDefinition = false;
   $stage: Observable<number>;
 
-
   constructor(
     private backend: BackendService,
   ) { }
 
   ngOnInit() {
-    this.$stage = this.backend.fetchStage();
+    this.backend.updateStage();
     console.log(this.$stage);
   }
 

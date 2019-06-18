@@ -6,13 +6,13 @@ import { style, state, animate, transition, trigger } from '@angular/animations'
   templateUrl: './moviecard.component.html',
   styleUrls: ['./moviecard.component.scss'],
   animations: [
-  trigger('slide', [
-    transition(':enter', [   // :enter is alias to 'void => *'
-      style({height:0}),
-      animate('0.1s ease-out', style({height:'*'}))
+    trigger('slide', [
+      transition(':enter', [   // :enter is alias to 'void => *'
+        style({height:0}),
+        animate('0.1s ease-out', style({height:'*'}))
+      ])
     ])
-  ])
-]
+  ]
 })
 export class MoviecardComponent implements OnInit {
 
