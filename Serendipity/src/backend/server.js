@@ -30,6 +30,7 @@ app.get('/api/users', (req, res) => {
     stage = sqlGetStage(user);
   }
 
+  res.status(200);
   res.send(stage.toString());
 });
 

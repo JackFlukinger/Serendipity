@@ -23,7 +23,7 @@ import { Observable } from 'rxjs';
 })
 export class AppComponent {
   showDefinition = false;
-  $stage: number = 1;
+  $stage: Observable<number>;
 
 
   constructor(
@@ -31,7 +31,7 @@ export class AppComponent {
   ) { }
 
   ngOnInit() {
-    //this.$stage = this.backend.fetchStage();
+    this.$stage = this.backend.fetchStage();
     console.log(this.$stage);
   }
 
