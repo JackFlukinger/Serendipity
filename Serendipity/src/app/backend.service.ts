@@ -19,6 +19,8 @@ export interface User {
 
 export class BackendService {
 
+  $stage: Observable<number>;
+
   constructor(
     private http: HttpClient) { }
 
@@ -26,9 +28,12 @@ export class BackendService {
 
   }
 
-  public fetchStage(): Observable<number> {
-    let $stage = this.http.get("http://localhost:8000/api/users").pipe(map(data => parseInt(data)));
-    return $stage;
+  public updateStage() {
+    this.$stage = this.http.get("http://localhost:8000/api/users").pipe(map(data => parseInt(<string> data)));
+  }
+
+  public getStage() {
+    return this.$stage;
   }
 
   addUser(user: User) {
@@ -39,7 +44,7 @@ export class BackendService {
       "likedgenres": user.genres
     }).subscribe(
       data  => {
-        console.log("Next stage");
+        this.updateStage();
     }, error  => {
       console.log("Error", error);
     });

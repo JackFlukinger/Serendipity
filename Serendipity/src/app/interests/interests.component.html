@@ -38,9 +38,9 @@
         <input type="button" class="genreBtn" [ngClass]="this.likedgenres.indexOf(i) > -1 ? 'selected' : ''" *ngFor = "let genre of genres; let i = index" id="{{ i }}" (click)="toggleGenre(i)" value ="{{ genre }}">
       </div>
 
-    <input type="submit" [disabled]="!profileForm.valid || this.getNumOfLikedGenres() < 3" value="next>">
+    <input type="submit" *ngIf="profileForm.valid && this.getNumOfLikedGenres() >= 3" value="next>" [@slide]>
 
   </form>
-  
+
   <p *ngIf="!this.profileForm.valid || this.getNumOfLikedGenres()<3" class = "invalidInput">Please fill all fields correctly.</p>
 </div>
