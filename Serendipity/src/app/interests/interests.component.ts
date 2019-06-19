@@ -51,11 +51,7 @@ export class InterestsComponent implements OnInit {
     "Western",
   ]
 
-  errorMess: string[] = [
-    "Invalid age",
-    "Invalid email",
-    "Invalid gender",
-    "Please select at least 3 genres"]
+  invalidOnServer: boolean;
 
   //when the user clicks, get the genre that they click on and the use that to change the value of likedgenres at that index
   likedgenres: number[];
@@ -83,10 +79,11 @@ export class InterestsComponent implements OnInit {
 
     this.showDropdown = false;
     this.likedgenres = [];
+    this.invalidOnServer = false;
 
     this.profileForm = this.fb.group({
       age: ['', [Validators.required, Validators.min(0), Validators.max(110)]],
-      gender: ['', [Validators.required]],
+      gender: ['', [Validators.required, Validators.pattern("Male|Female|Other")]],
       email: ['', [Validators.required, Validators.email]]
     });
 
@@ -103,6 +100,7 @@ export class InterestsComponent implements OnInit {
       genres : this.likedgenres
     }
     console.log(user);
+
     this.backend.addUser(user);
   }
 }

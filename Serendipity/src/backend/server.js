@@ -26,16 +26,42 @@ app.get('/api/users', (req, res) => {
   let user = req.cookies.email;
   let stage = 1;
 
-  if (user != undefined) {
-    stage = sqlGetStage(user);
-  }
+  if (user == undefined) {
+    res.send({stage: stage.toString()});
+  } else {
+    let db = new sqlite3.Database(dbPath, sqlite3.OPEN_READWRITE, (err) => {
+      if (err) {
+        return console.error(err.message);
+      }
+      console.log('Connected to the SQlite database.');
+    });
 
-  res.status(200);
-  res.send(stage.toString());
+
+    let sql = 'SELECT stage FROM users WHERE email = \'' + user + '\';';
+
+    stage = db.get(sql, (err, row) => {
+      if (err) {
+        return 1;
+      }
+      return row
+        ? row.stage
+        : 1;  //Return stage 1 if user is not in database
+      });
+
+      res.send({stage: stage.toString()});
+
+    db.close((err) => {
+      if (err) {
+        return console.error(err.message);
+      }
+      console.log('Closed the database connection.');
+    });
+  }
 });
 
 app.post('/api/users', (req, res) => {
   console.log("trying to create user");
+
   let email = req.body.email;
   let age = req.body.age;
   let gender = req.body.gender;
@@ -44,74 +70,41 @@ app.post('/api/users', (req, res) => {
   //Validation checks
   if ((age<0 || age>100) || !email.includes('@') || !email.includes('.') || !(gender == 'Male' || gender =='Female' || gender == 'Other') || likedgenres.length < 3){
 
-    res.write("failure");
-    res.end();
+    res.send({result: "failure"});
   } else {
 
     console.log(email, age, gender, likedgenres);
-    sqlAddUser(age, gender, email, likedgenres);
 
-    res.write("success");
-    res.end();
-  }
-});
-
-function sqlAddUser(age, gender, email, genres) {
-  let db = new sqlite3.Database(dbPath, sqlite3.OPEN_READWRITE, (err) => {
-    if (err) {
-      return console.error(err.message);
-    }
-    console.log('Connected to the SQlite database.');
-  });
-
-
-  let sql = 'INSERT INTO users(email, age, gender, favgenres, stage) VALUES (\'' +
-  email + '\', \'' +
-  age + '\', \'' +
-  gender + '\', \'' +
-  genres + '\', \'' +
-  '2' + '\');';
-
-  db.run(sql, function(err) {
-    if (err) {
-      console.log(err);
-    }
-  });
-
-
-  db.close((err) => {
-    if (err) {
-      return console.error(err.message);
-    }
-    console.log('Closed the database connection.');
-  });
-}
-
-function sqlGetStage(user) {
-  let db = new sqlite3.Database(dbPath, sqlite3.OPEN_READWRITE, (err) => {
-    if (err) {
-      return console.error(err.message);
-    }
-    console.log('Connected to the SQlite database.');
-  });
-
-
-  let sql = 'SELECT stage FROM users WHERE email = \'' + user + '\';';
-
-  db.get(sql, (err, row) => {
-    if (err) {
-      return console.error(err.message);
-    }
-    return row
-      ? row.stage
-      : 1;  //Return stage 1 if user is not in database
+    let db = new sqlite3.Database(dbPath, sqlite3.OPEN_READWRITE, (err) => {
+      if (err) {
+        return console.error(err.message);
+      }
+      console.log('Connected to the SQlite database.');
     });
 
 
-  db.close((err) => {
-    if (err) {
-      return console.error(err.message);
-    }
-    console.log('Closed the database connection.');
-  });
-}
+    let sql = 'INSERT INTO users(email, age, gender, favgenres, stage) VALUES (\'' +
+    email + '\', \'' +
+    age + '\', \'' +
+    gender + '\', \'' +
+    likedgenres + '\', \'' +
+    '2' + '\');';
+
+    db.run(sql, function(err) {
+      if (err) {
+        res.send({result: "failure"});
+      } else {
+        console.log("Error");
+        res.cookie('email', email, { maxAge: 4000000, httpOnly: true })
+        .json({"result": "success"}).send();
+      }
+    });
+
+    db.close((err) => {
+      if (err) {
+        return console.error(err.message);
+      }
+      console.log('Closed the database connection.');
+    });
+  }
+});
