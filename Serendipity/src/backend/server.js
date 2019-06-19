@@ -41,11 +41,19 @@ app.post('/api/users', (req, res) => {
   let gender = req.body.gender;
   let likedgenres = req.body.likedgenres;
 
-  console.log(email, age, gender, likedgenres);
-  sqlAddUser(age, gender, email, likedgenres);
+  //Validation checks
+  if ((age<0 || age>100) || !email.includes('@') || !email.includes('.') || !(gender == 'Male' || gender =='Female' || gender == 'Other') || likedgenres.length < 3){
 
-  res.write("User added!")
-  res.end();
+    res.write("failure");
+    res.end();
+  } else {
+
+    console.log(email, age, gender, likedgenres);
+    sqlAddUser(age, gender, email, likedgenres);
+
+    res.write("success");
+    res.end();
+  }
 });
 
 function sqlAddUser(age, gender, email, genres) {
@@ -62,9 +70,13 @@ function sqlAddUser(age, gender, email, genres) {
   age + '\', \'' +
   gender + '\', \'' +
   genres + '\', \'' +
-  2 + '\');';
+  '2' + '\');';
 
-  db.run(sql);
+  db.run(sql, function(err) {
+    if (err) {
+      console.log(err);
+    }
+  });
 
 
   db.close((err) => {
