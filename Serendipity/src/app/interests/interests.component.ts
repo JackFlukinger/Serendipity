@@ -9,7 +9,7 @@ import { trigger, style, animate, transition } from '@angular/animations';
   selector: 'app-interests',
   templateUrl: './interests.component.html',
   styleUrls: ['./interests.component.scss'],
-  providers: [ BackendService ],
+  providers: [ ],
   animations: [
   trigger('slide', [
     transition(':enter', [   // :enter is alias to 'void => *'
@@ -27,7 +27,6 @@ import { trigger, style, animate, transition } from '@angular/animations';
 export class InterestsComponent implements OnInit {
 
   showDropdown: boolean;
-
   profileForm: FormGroup;
 
   genres: string[] = [
@@ -51,7 +50,6 @@ export class InterestsComponent implements OnInit {
     "Western",
   ]
 
-  invalidOnServer: boolean;
 
   //when the user clicks, get the genre that they click on and the use that to change the value of likedgenres at that index
   likedgenres: number[];
@@ -79,7 +77,6 @@ export class InterestsComponent implements OnInit {
 
     this.showDropdown = false;
     this.likedgenres = [];
-    this.invalidOnServer = false;
 
     this.profileForm = this.fb.group({
       age: ['', [Validators.required, Validators.min(0), Validators.max(110)]],

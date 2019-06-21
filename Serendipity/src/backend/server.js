@@ -22,12 +22,11 @@ app.listen(8000, () => {
 });
 
 app.get('/api/users', (req, res) => {
-  console.log("trying to fetch stage");
   let user = req.cookies.email;
-  let stage = 1;
+  console.log("trying to fetch stage for user " + user);
 
   if (user == undefined) {
-    res.send({stage: stage.toString()});
+    res.send({stage: 1});
   } else {
     let db = new sqlite3.Database(dbPath, sqlite3.OPEN_READWRITE, (err) => {
       if (err) {
@@ -36,19 +35,16 @@ app.get('/api/users', (req, res) => {
       console.log('Connected to the SQlite database.');
     });
 
-
     let sql = 'SELECT stage FROM users WHERE email = \'' + user + '\';';
 
-    stage = db.get(sql, (err, row) => {
-      if (err) {
-        return 1;
+    db.get(sql, (err, row) => {
+      if (row) {
+        console.log(row.stage);
+        res.send({stage: row.stage});
+      } else {
+        res.send({stage: 1});
       }
-      return row
-        ? row.stage
-        : 1;  //Return stage 1 if user is not in database
-      });
-
-      res.send({stage: stage.toString()});
+    });
 
     db.close((err) => {
       if (err) {
@@ -94,9 +90,8 @@ app.post('/api/users', (req, res) => {
       if (err) {
         res.send({result: "failure"});
       } else {
-        console.log("Error");
-        res.cookie('email', email, { maxAge: 4000000, httpOnly: true })
-        .json({"result": "success"}).send();
+        res.setHeader('Cache-Control','private');
+        res.cookie('email', email, { maxAge: 315360000000, httpOnly: false }).send({"result": "success"});
       }
     });
 

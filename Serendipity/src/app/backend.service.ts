@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { EmailValidator } from '@angular/forms';
 import { AppComponent } from './app.component';
-
 
 export interface User {
   age: number;
@@ -14,12 +13,13 @@ export interface User {
 }
 
 @Injectable({
- providedIn: 'root'
+ providedIn: 'root',
 })
 
 export class BackendService {
 
-  $stage: Observable<number>;
+  private stage: BehaviorSubject<number> = new BehaviorSubject<number>(0);
+  public $stage: Observable<number> = this.stage.asObservable();
 
   constructor(
     private http: HttpClient) { }
@@ -29,11 +29,13 @@ export class BackendService {
   }
 
   public updateStage() {
-    this.$stage = this.http.get("http://localhost:8000/api/users").pipe(map(data => parseInt(<string> (data as any).stage)));
-  }
-
-  public getStage() {
-    return this.$stage;
+    this.http.get("http://localhost:8000/api/users").subscribe(
+      data  => {
+        this.stage.next((data as any).stage);
+        console.log(this.stage);
+    }, error  => {
+      console.log("Error", error);
+    });
   }
 
   addUser(user: User) {
@@ -55,7 +57,10 @@ export class BackendService {
       data  => {
         console.log((data as any).result);
         if ((data as any).result == "success") {
+          console.log("updating stage");
           this.updateStage();
+        } else {
+
         }
     }, error  => {
       console.log("Error", error);

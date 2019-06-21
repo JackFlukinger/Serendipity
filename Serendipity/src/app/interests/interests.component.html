@@ -47,6 +47,6 @@
     <p *ngIf="!this.profileForm.get('gender').valid && (this.profileForm.get('gender').touched || this.profileForm.get('gender').dirty)" [@slide]>Invalid Gender</p>
     <p *ngIf="!this.profileForm.get('email').valid && (this.profileForm.get('email').touched || this.profileForm.get('email').dirty)" [@slide]>Invalid Email</p>
     <p *ngIf="(this.getNumOfLikedGenres() < 3 && (this.getNumOfLikedGenres() > 0 || (this.profileForm.touched || this.profileForm.dirty)))" [@slide]>Please select at least three genres!</p>
-    <p *ngIf="this.invalidOnServer" [@slide]>Invalid input</p>
+    <p *ngIf="this.backend.serverError" [@slide]>Invalid input</p>
   </div>
 </div>

@@ -18,9 +18,19 @@ import { Observable } from 'rxjs';
         style({opacity:1}),
         animate('0.2s ease-in', style({opacity:0}))
       ])
+    ]),
+    trigger('slideInOut', [
+      transition(':enter', [
+        style({transform: 'translateX(100%)'}),
+        animate('.5s .2s ease-in-out', style({transform: 'translateX(0%)'}))
+      ]),
+      transition(':leave', [
+        animate('.2s ease-in-out', style({transform: 'translateX(-100%)'}))
+      ])
     ])
   ]
 })
+
 export class AppComponent {
   showDefinition = false;
   $stage: Observable<number>;
