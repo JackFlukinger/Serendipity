@@ -90,7 +90,6 @@ app.post('/api/users', (req, res) => {
       if (err) {
         res.send({result: "failure"});
       } else {
-        res.setHeader('Cache-Control','private');
         res.cookie('email', email, { maxAge: 315360000000, httpOnly: false }).send({"result": "success"});
       }
     });
