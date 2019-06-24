@@ -12,6 +12,14 @@ export interface User {
   genres: number[];
 }
 
+export interface Movie {
+  id: number,
+  name: string,
+  year: number,
+  ageRating: string,
+  poster: string
+}
+
 @Injectable({
  providedIn: 'root',
 })
@@ -65,6 +73,36 @@ export class BackendService {
     }, error  => {
       console.log("Error", error);
     });
+  }
+
+  getRandom() {
+    let test:Movie = {
+      id: 4,
+      name: "The Test of Test",
+      year: 2008,
+      ageRating: "PG-13",
+      poster: "https://m.media-amazon.com/images/M/MV5BMTc5MDE2ODcwNV5BMl5BanBnXkFtZTgwMzI2NzQ2NzM@._V1_SX800.jpg"
+    };
+
+    let test2:Movie = {
+      id: 2,
+      name: "Second Movie",
+      year: 2011,
+      ageRating: "PG-13",
+      poster: "https://m.media-amazon.com/images/M/MV5BMTc5MDE2ODcwNV5BMl5BanBnXkFtZTgwMzI2NzQ2NzM@._V1_SX800.jpg"
+    };
+
+    let test3:Movie = {
+      id: 7,
+      name: "The Third Movie",
+      year: 2018,
+      ageRating: "PG",
+      poster: "https://m.media-amazon.com/images/M/MV5BMTc5MDE2ODcwNV5BMl5BanBnXkFtZTgwMzI2NzQ2NzM@._V1_SX800.jpg"
+    };
+
+    let movies = [test, test2, test3];
+
+    return movies;
   }
 
 }

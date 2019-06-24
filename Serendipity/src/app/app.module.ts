@@ -10,6 +10,7 @@ import { InterestsComponent } from './interests/interests.component';
 import { RandomComponent } from './random/random.component';
 import { SerendipitousComponent } from './serendipitous/serendipitous.component';
 import { MoviecardComponent } from './moviecard/moviecard.component';
+import { HaveseenComponent } from './haveseen/haveseen.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { MoviecardComponent } from './moviecard/moviecard.component';
     InterestsComponent,
     RandomComponent,
     SerendipitousComponent,
-    MoviecardComponent
+    MoviecardComponent,
+    HaveseenComponent
   ],
   imports: [
     BrowserModule,

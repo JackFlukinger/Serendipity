@@ -8,5 +8,6 @@
   </h2>
 </div>
 <app-interests *ngIf="(backend.$stage | async) == 1" [@slideInOut]></app-interests>
-<app-random *ngIf="(backend.$stage | async) == 2" [@slideInOut]></app-random>
-<app-serendipitous *ngIf="(backend.$stage | async) == 3" [@slideInOut]></app-serendipitous>
+<app-haveseen *ngIf="(backend.$stage | async) == 2" [@slideInOut]></app-haveseen>
+<app-random *ngIf="(backend.$stage | async) == 3" [@slideInOut]></app-random>
+<app-serendipitous *ngIf="(backend.$stage | async) == 4" [@slideInOut]></app-serendipitous>
