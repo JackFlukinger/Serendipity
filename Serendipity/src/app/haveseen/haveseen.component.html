@@ -2,14 +2,20 @@
   Name: {{ this.movies[this.index].name }}
   Year: {{ this.movies[this.index].year }}
   Rating: {{ this.movies[this.index].ageRating }}
-  <div class="unseen">I have not seen this before</div>
-  <div class="seen">I have seen this before</div>
-  <div class="rating">
-    <span id="1star" [ngClass]="stars >= 1 ? 'selected' : ''" class="fa fa-star" (click)="stars = 1; tempstars = 1;" (mouseenter)="tempstars = stars; stars = 1;"  (mouseleave) ="stars = tempstars; tempstars = 1;"></span>
-    <span id="2star" [ngClass]="stars >= 2 ? 'selected' : ''" class="fa fa-star" (click)="stars = 2; tempstars = 2;" (mouseenter)="tempstars = stars; stars = 2;"  (mouseleave) ="stars = tempstars; tempstars = 2;"></span>
-    <span id="3star" [ngClass]="stars >= 3 ? 'selected' : ''" class="fa fa-star" (click)="stars = 3; tempstars = 3;" (mouseenter)="tempstars = stars; stars = 3;"  (mouseleave) ="stars = tempstars; tempstars = 3;"></span>
-    <span id="4star" [ngClass]="stars >= 4 ? 'selected' : ''" class="fa fa-star" (click)="stars = 4; tempstars = 4;" (mouseenter)="tempstars = stars; stars = 4;"  (mouseleave) ="stars = tempstars; tempstars = 4;"></span>
-    <span id="5star" [ngClass]="stars >= 5 ? 'selected' : ''" class="fa fa-star" (click)="stars = 5; tempstars = 5;" (mouseenter)="tempstars = stars; stars = 5;"  (mouseleave) ="stars = tempstars; tempstars = 5;"></span>
+  <div class="seenbox">
+    <div class="seenorunseen">I have not seen this before</div>
+    <div class="seenorunseen" (click)="haveseen=true">
+      I have seen this before
+      <div class="shell" *ngIf="haveseen">
+        <div *ngIf="haveseen" class="rating">
+          <span id="1star" [ngClass]="stars >= 1 ? 'selected' : ''" class="fa fa-star" (click)="stars = 1; tempstars = 1;" (mouseenter)="tempstars = stars; stars = 1;"  (mouseleave) ="stars = tempstars; tempstars = 1;"></span>
+          <span id="2star" [ngClass]="stars >= 2 ? 'selected' : ''" class="fa fa-star" (click)="stars = 2; tempstars = 2;" (mouseenter)="tempstars = stars; stars = 2;"  (mouseleave) ="stars = tempstars; tempstars = 2;"></span>
+          <span id="3star" [ngClass]="stars >= 3 ? 'selected' : ''" class="fa fa-star" (click)="stars = 3; tempstars = 3;" (mouseenter)="tempstars = stars; stars = 3;"  (mouseleave) ="stars = tempstars; tempstars = 3;"></span>
+          <span id="4star" [ngClass]="stars >= 4 ? 'selected' : ''" class="fa fa-star" (click)="stars = 4; tempstars = 4;" (mouseenter)="tempstars = stars; stars = 4;"  (mouseleave) ="stars = tempstars; tempstars = 4;"></span>
+          <span id="5star" [ngClass]="stars >= 5 ? 'selected' : ''" class="fa fa-star" (click)="stars = 5; tempstars = 5;" (mouseenter)="tempstars = stars; stars = 5;"  (mouseleave) ="stars = tempstars; tempstars = 5;"></span>
+        </div>
+      </div>
+    </div>
   </div>
   <div class="nextMovie" (click)="next()">
     Next>

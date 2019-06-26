@@ -33,6 +33,7 @@ export class HaveseenComponent implements OnInit {
   next() {
     if (this.index + 1 < this.movies.length) {
       this.index = this.index + 1;
+      this.haveseen = false;
     }
   }
 
