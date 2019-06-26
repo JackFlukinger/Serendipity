@@ -78,20 +78,33 @@ app.post('/api/users', (req, res) => {
       console.log('Connected to the SQlite database.');
     });
 
+    //SQL to generate the random movies for the rapid fire haveseen stuff
+    let randomSQL = 'SELECT id FROM movies ORDER BY RANDOM() LIMIT 100;';
 
-    let sql = 'INSERT INTO users(email, age, gender, favgenres, stage) VALUES (\'' +
-    email + '\', \'' +
-    age + '\', \'' +
-    gender + '\', \'' +
-    likedgenres + '\', \'' +
-    '2' + '\');';
-
-    db.run(sql, function(err) {
+    db.all(randomSQL, (err, rows) => {
       if (err) {
-        res.send({result: "failure"});
-      } else {
-        res.cookie('email', email, { maxAge: 315360000000, httpOnly: false }).send({"result": "success"});
+        throw err;
       }
+      let randomMovies = [];
+      rows.forEach((row) => {
+        randomMovies.push(row.id);
+      });
+
+      let sql = 'INSERT INTO users(email, age, gender, favgenres, stage, possibleseen) VALUES (\'' +
+      email + '\', \'' +
+      age + '\', \'' +
+      gender + '\', \'' +
+      likedgenres + '\', \'' +
+      '2' + '\', \'' +
+      randomMovies + '\');';
+
+      db.run(sql, function(err) {
+        if (err) {
+          res.send({result: "failure"});
+        } else {
+          res.cookie('email', email, { maxAge: 315360000000, httpOnly: false }).send({"result": "success"});
+        }
+      });
     });
 
     db.close((err) => {

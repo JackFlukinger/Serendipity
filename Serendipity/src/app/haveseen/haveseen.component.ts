@@ -9,6 +9,9 @@ import { BackendService, Movie } from '../backend.service';
 })
 export class HaveseenComponent implements OnInit {
 
+  stars = 0;
+  tempstars = 0;
+  haveseen: boolean;
   index: number;
   movies: Movie[];
 
@@ -17,9 +20,14 @@ export class HaveseenComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.haveseen = false;
     this.index = 0;
     this.movies = this.backend.getRandom();
 
+  }
+
+  hasSeenMovie() {
+    this.haveseen = true;
   }
 
   next() {

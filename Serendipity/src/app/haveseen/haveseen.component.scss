@@ -1,0 +1,27 @@
+.rating {
+  margin-top: auto;
+  margin-bottom: auto;
+  margin-left: auto;
+  text-shadow: 0px 0px 2px black;
+  display: inline-grid;
+  grid-template-columns: 2.3em 2.3em 2.3em 2.3em 2.3em;
+  grid-template-rows: 2.3em;
+}
+
+.fa-star {
+  font-size: 2em;
+  transition: .2s;
+  width: 100%;
+  text-align: center;
+  margin-top:auto;
+
+  &:hover {
+    cursor: pointer;
+    font-size: 2.3em;
+    text-shadow: 0px 0px 3px black;
+  }
+}
+
+.selected {
+  color: #ffb01f;
+}
