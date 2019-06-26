@@ -3,8 +3,9 @@
     <h2>
       Please watch and rate this movie to help us tailor our recommendations for you.
       If you have already seen it, please rate it accordingly.
-      You have {{ moviesLeft }} movies left to rate.
     </h2>
+    <h2>Movies Left to Rate: <span class="moviesLeft">{{ moviesLeft }}</span></h2>
+
   </div>
-  <app-moviecard></app-moviecard>
+    <app-moviecard *ngFor = "let movie of movies" [aMovie] = "movie"></app-moviecard>
 </div>

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { trigger, style, animate, transition } from '@angular/animations';
+import { BackendService, Movie } from '../backend.service';
+import { MoviecardComponent } from '../moviecard/moviecard.component';
 
 @Component({
   selector: 'app-random',
@@ -14,12 +16,23 @@ export class RandomComponent implements OnInit {
 
   moviesLeft = this.moviesToRate - this.moviesRated;
 
-  constructor() {
+  movies: Movie[]
+
+
+  constructor(
+    private backend: BackendService
+  ) {
 
    }
 
-  ngOnInit() {
+   
 
+
+  ngOnInit() {
+    //Get movies info from db at random index
+     this.movies = this.backend.getRandom()
+
+    
 
   }
 

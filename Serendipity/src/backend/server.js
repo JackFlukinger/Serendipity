@@ -107,6 +107,10 @@ app.post('/api/users', (req, res) => {
       });
     });
 
+
+    //sql to add a rating for a random movie in RRS phase
+    //let RRSsql = 'INSERT INTO randomratings(email, movie, rating, timestamp) VALUES (\''+
+  
     db.close((err) => {
       if (err) {
         return console.error(err.message);

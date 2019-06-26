@@ -7,7 +7,7 @@
     (noun): the faculty or phenomenon of finding valuable or agreeable things not sought for
   </h2>
 </div>
-<app-interests *ngIf="(backend.$stage | async) == 1" [@slideInOut]></app-interests>
+<app-interests *ngIf="(backend.$stage | async) == 3" [@slideInOut]></app-interests>
 <app-haveseen *ngIf="(backend.$stage | async) == 2" [@slideInOut]></app-haveseen>
-<app-random *ngIf="(backend.$stage | async) == 3" [@slideInOut]></app-random>
+<app-random *ngIf="(backend.$stage | async) == 1" [@slideInOut]></app-random>
 <app-serendipitous *ngIf="(backend.$stage | async) == 4" [@slideInOut]></app-serendipitous>
